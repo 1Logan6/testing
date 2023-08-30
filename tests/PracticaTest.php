@@ -5,21 +5,21 @@ use GuzzleHttp\Client;
 
 final class PracticaTest extends TestCase
 {
-    public function testFilesExistence(): void
+    public function testFilesExistence(): void /* Los archivos deben empezar con test, este test es de existencia*/
     {
-        $this->assertFileExists('index.php');
-        $this->assertFileExists('store.php');
-        $this->assertFileExists('conexion.php');
+        $this->assertFileExists('index.php'); /* */
+        $this->assertFileExists('store.php');   
+        $this->assertFileExists('config.php');
     }
 
-    public function testForm(): void
+    public function testForm(): void /* Verifica que tenga un action store.php y metodo post */
     {
         $form = file_get_contents('index.php');
         $this->assertStringContainsStringIgnoringCase('action="store.php"', $form, $message = 'No se ha definido action');
         $this->assertStringContainsStringIgnoringCase('method="post"', $form, $message = 'No está asignado el método post');
     }
 
-    public function testStore(): void
+    public function testStore(): void /* Que tenga las palabras claves del inicio de cada cadena */
     {
         $form = file_get_contents('store.php');
         $this->assertStringContainsStringIgnoringCase('$_POST', $form, $message = 'No se utiliza $_POST');
